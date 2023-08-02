@@ -1,0 +1,2 @@
+env:
+  VAULT_URL: "http://dev.vault.url.com"
