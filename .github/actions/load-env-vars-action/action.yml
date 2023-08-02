@@ -1,0 +1,22 @@
+name: 'Load Environment Variables from project-config-env.yml'
+description: 'Reads the project-config-env.yml file and sets the environment variables'
+
+inputs:
+  env_file:
+    description: 'The path to the project-config-env.yml file'
+    required: true
+  environment:
+    description: 'The running environment (e.g., "linux" or "windows")'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Load environment variables
+      run: |
+        if [ "${{ inputs.environment }}" == "windows" ]; then
+          powershell -Command "& .\entrypoint.bat '${{ inputs.env_file }}'"
+        else
+          sh ./entrypoint.sh "${{ inputs.env_file }}"
