@@ -15,6 +15,18 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  load_env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Load environment variables from project-config-env.yml
+        id: load_env_vars
+        uses: ./.github/actions/load-env-vars-action
+        with:
+          env_file: './github/project-config-env.yml'
+          environment: 'linux'
+          
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
@@ -34,3 +46,6 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      - name: Reading env variable
+        run: |
+          echo ${{ needs.load_env.outputs.VAULT_URL }}
