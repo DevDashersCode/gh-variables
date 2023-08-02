@@ -1,5 +1,5 @@
 env_file="${1}"
-if [ -f "$env_file ]; then
+if [ -f "$env_file" ]; then
   source "$env_file"
   for var in $(cat "$env_file"); do
     export "$var"
