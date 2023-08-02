@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Load environment variables from project-config-env.yml
         id: load_env_vars
-        uses: DevDashersCode/gh-variables/load-env-vars-action@main
+        uses: ./actions/load-env-vars-action@main
         with:
           env_file: './.github/project-config-env.yml'
           environment: 'linux'
